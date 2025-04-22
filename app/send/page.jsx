@@ -22,9 +22,13 @@ export default function Send() {
     }
 
     const onReqDiabetesPredict = async () => {
-        const response = await axiosService.reqDiabetesPredict(userData);
-        setResultDiabetesData(response.data);
-        return response;
+        try {
+            const response = await axiosService.reqDiabetesPredict(userData);
+            setResultDiabetesData(response.data);
+            return response;
+        } catch (error) {
+            console.error('Error processing requests:', error);
+        }
     };
 
     const onReqHypertentionPredict = async () => {

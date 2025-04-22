@@ -15,13 +15,14 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
+        console.log("errorr",error)
         // จัดการ error ที่นี่
         if (error.response) {
             // กรณีเซิร์ฟเวอร์ตอบกลับด้วย status code นอกเหนือจาก 2xx
             console.error('Response error:', error.response.data);
         } else if (error.request) {
             // กรณีที่ไม่ได้รับการตอบกลับจากเซิร์ฟเวอร์
-            console.error('Request error:', error.request);
+            console.error('Request error:', error);
         } else {
             // กรณีอื่นๆ
             console.error('Error:', error.message);
