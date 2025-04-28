@@ -28,7 +28,7 @@ export default function EatFriedFood() {
                 {/* Title */}
                 <div className="space-y-2">
                     <h1 className="text-2xl font-bold text-green-800">
-                        คุณกินของทอด หรือไม่
+                        คุณกินของทอด บ่อยหรือไม่
 
                     </h1>
                 </div>

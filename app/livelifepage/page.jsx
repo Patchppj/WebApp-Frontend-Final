@@ -6,7 +6,7 @@ export default function LiveLife() {
     const router = useRouter();
 
     const handleStartClick = () => {
-        router.push('/livelifepage/coronaryArtery');
+        router.push('/livelifepage/disease');
     }
 
     return (

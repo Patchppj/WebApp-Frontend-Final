@@ -1,12 +1,13 @@
 import axios from 'axios';
 
+
 // สร้าง instance ของ axios แบบง่าย
 const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://web-d1geyfeenwte.up-de-fra1-k8s-1.apps.run-on-seenode.com',
     headers: {
         'Content-Type': 'application/json',
     },
-    timeout: 5000,
+    
 });
 
 // เพิ่ม interceptor สำหรับจัดการ response error
@@ -33,7 +34,11 @@ axiosInstance.interceptors.response.use(
 
 const axiosService = {
     reqDiabetesPredict: (userData) => axiosInstance.post("/diabetes/predict", userData),
-    reqHypertentionPredict: (userData) => axiosInstance.post("/hypertention/predict", userData),
+    reqHypertentionPredict: (userData) => axiosInstance.post("/hypertention/predict", userData), 
+    //saveUserDataToExcel: (userData) => axiosInstance.post("/save-to-excel/", userData),
+    //saveUserDataToExcel: async (userData) => {
+        //return await axios.post('http://localhost:8000/save-to-excel/', userData);
+      //},
 };
 
 export default axiosService;
