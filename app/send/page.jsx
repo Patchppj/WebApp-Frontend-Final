@@ -10,14 +10,26 @@ export default function Send() {
 
     const handleStartClick = async () => {
         try {
-            await Promise.all([
-                onReqDiabetesPredict(),
-                onReqHypertentionPredict()
-            ]);
-            // Navigate to result page after both API calls are successful
+            // 1. ยิง request ไปที่เส้นแรก (diabetes/predict)
+            const diabetesResponse = await onReqDiabetesPredict();
+            
+            // 2. รับ session_id จากผลลัพธ์ของเส้นแรก
+            const sessionId = diabetesResponse?.data?.session_id;
+            
+            if (!sessionId) {
+                console.error('ไม่พบ session_id จากการทำนายเบาหวาน');
+                return;
+            }
+            console.log("sessionId",sessionId)
+            // 3. ส่ง session_id พร้อมกับ request ไปยังเส้นที่สอง (hypertention/predict)
+            const hypertentionResponse = await onReqHypertentionPredict(sessionId);
+
+            console.log("hypertentionResponse",hypertentionResponse)
+            
+            // นำทางไปหน้าผลลัพธ์
             router.push('/result');
         } catch (error) {
-            console.error('Error processing requests:', error);
+            console.error('เกิดข้อผิดพลาดในการประมวลผลคำขอ:', error);
         }
     }
 
@@ -31,8 +43,11 @@ export default function Send() {
         }
     };
 
-    const onReqHypertentionPredict = async () => {
-        const response = await axiosService.reqHypertentionPredict(userData);
+    const onReqHypertentionPredict = async (sessionId) => {
+        // เพิ่ม session_id เข้าไปในข้อมูลที่ส่งไป
+        const dataWithSessionId = { ...userData, session_id: sessionId };
+        
+        const response = await axiosService.reqHypertentionPredict(dataWithSessionId);
         setResultHypertentionData(response.data);
         return response;
     };
