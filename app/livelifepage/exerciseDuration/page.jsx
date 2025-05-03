@@ -38,7 +38,7 @@ export default function ExerciseDuration() {
                         onClick={() => handleStartClick(1)}
                         className="bg-[#165B33] hover:bg-[#124a29] text-white px-10 py-4 rounded-full transition-all cursor-pointer hover:transform hover:-translate-y-1 w-60 text-lg"
                     >
-                        ประมาณ 15 นาที
+                        น้อยกว่าหรือประมาณ 15 นาที
                     </button>
                 </div>
                 <div className="mb-[10px]">
